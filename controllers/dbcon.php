@@ -12,4 +12,3 @@ $con = mysqli_connect($servername, $username, $password,$db);
 //   die("Connection failed: " . $conn->connect_error);
 // }
 // echo "Connected successfully";
-?>

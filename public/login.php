@@ -46,7 +46,8 @@ include('../includes/header.php');
                                 <button type="submit" class="btn btn-primary" name="login_now_btn">Login Now</button>
                             </div>
                         </form>
-                        <a href="register.php">REGISTER HERE</a>
+                        <a href="register.php">REGISTER HERE</a> |
+                        <a href="resend-email-verification.php">RESEND EMAIL VERIFICATION</a>
                     </div>
                 </div>
             </div>
