@@ -8,6 +8,7 @@ class LoginCode
     {
         $db = new dbcon();
         $con = $db->ConnectionDatabase();
+        
         if (isset($_POST['login_now_btn'])) 
         {
             if (!empty(trim($_POST['email'])) && !empty(trim($_POST['password']))) 

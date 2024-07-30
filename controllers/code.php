@@ -13,37 +13,36 @@ class Code
         {
             $email = $_POST['email'];
             $password = $_POST['password'];
-            $passowrd_hashed = password_hash($password,PASSWORD_BCRYPT);
+            $passowrd_hashed = password_hash($password, PASSWORD_BCRYPT);
+            // echo "Password Hashed: " . $passowrd_hashed; // Debug statement
             $phone = $_POST['phone'];
             $name = $_POST['name'];
             $verify_token = md5(rand());
 
-
             $check_email_query = "SELECT email FROM users WHERE email='$email' LIMIT 1";
-            $check_email_query =mysqli_query($con,$check_email_query);
+            $check_email_query = mysqli_query($con, $check_email_query);
             
             if (mysqli_num_rows($check_email_query) > 0) {
                 $_SESSION['status'] = "Email Id ALready Exist";
-                header("Location: register.php");
-            }else {
-                $query = "INSERT INTO users(email,password,phone,name,verify_token) VALUES ('$email','$passowrd_hashed ','$phone','$name','$verify_token')";
+                header("Location: ../public/register.php");
+            } else {
+                $query = "INSERT INTO users(email, password, phone, name, verify_token) VALUES ('$email', '$passowrd_hashed', '$phone', '$name', '$verify_token')";
 
-                $query_run = mysqli_query($con,$query);
+                $query_run = mysqli_query($con, $query);
 
                 if ($query_run) {
                     $verifyUser = new verifyUser();
-                    $verifyUser->sendVerifyEmail("$name","$email","$verify_token");
+                    $verifyUser->sendVerifyEmail("$name", "$email", "$verify_token");
                     $_SESSION['status'] = "Registration Succesfully, Please Verify Your Account";
                     header("Location: ../public/login.php");
-                }else {
-                    $_SESSION['status'] = "Registrastion Failed";
+                } else {
+                    $_SESSION['status'] = "Registration Failed";
                     header("Location: ../public/register.php");
                 }
             }
         }
     }
-
-} 
+}
 
 $code = new Code();
 $code->Register();
