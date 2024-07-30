@@ -45,6 +45,7 @@ if (isset($_POST['password_update']))
     $email = mysqli_real_escape_string($con,$_POST['email']);
     $new_password = mysqli_real_escape_string($con,$_POST['new_password']);
     $confirm_password = mysqli_real_escape_string($con,$_POST['confirm_password']);
+    $passowrd_hashed = password_hash($confirm_password,PASSWORD_BCRYPT);
     
     $token = mysqli_real_escape_string($con,$_POST['password_token']);
 
@@ -58,7 +59,7 @@ if (isset($_POST['password_update']))
             {
                 if ($new_password == $confirm_password) 
                 {
-                    $update_password = "UPDATE users SET password='$new_password' WHERE verify_token='$token' LIMIT 1";
+                    $update_password = "UPDATE users SET password='$passowrd_hashed' WHERE verify_token='$token' LIMIT 1";
                     $update_password_run = mysqli_query($con,$update_password);
 
                     if ($update_password_run) {

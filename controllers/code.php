@@ -8,6 +8,7 @@ session_start();
     {
             $email = $_POST['email'];
             $password = $_POST['password'];
+            $passowrd_hashed = password_hash($password,PASSWORD_BCRYPT);
             $phone = $_POST['phone'];
             $name = $_POST['name'];
             $verify_token = md5(rand());
@@ -20,14 +21,14 @@ session_start();
                 $_SESSION['status'] = "Email Id ALready Exist";
                 header("Location: register.php");
             }else {
-                $query = "INSERT INTO users(email,password,phone,name,verify_token) VALUES ('$email','$password','$phone','$name','$verify_token')";
+                $query = "INSERT INTO users(email,password,phone,name,verify_token) VALUES ('$email','$passowrd_hashed ','$phone','$name','$verify_token')";
 
                 $query_run = mysqli_query($con,$query);
 
                 if ($query_run) {
                     sendVerifyEmail("$name","$email","$verify_token");
                     $_SESSION['status'] = "Registration Succesfully, Please Verify Your Account";
-                    header("Location: ../public/index.php");
+                    header("Location: ../public/login.php");
                 }else {
                     $_SESSION['status'] = "Registrastion Failed";
                     header("Location: ../public/register.php");
