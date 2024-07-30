@@ -47,7 +47,8 @@ include('../includes/header.php');
                             </div>
                         </form>
                         <a href="register.php">REGISTER HERE</a> |
-                        <a href="resend-email-verification.php">RESEND EMAIL VERIFICATION</a>
+                        <a href="resend-email-verification.php">RESEND EMAIL VERIFICATION</a> | 
+                        <a href="password-reset.php">FORGOT PASSWORD?</a> 
                     </div>
                 </div>
             </div>
