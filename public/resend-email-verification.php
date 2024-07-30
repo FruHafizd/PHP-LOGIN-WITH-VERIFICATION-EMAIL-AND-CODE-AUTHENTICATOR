@@ -28,7 +28,7 @@ include('../includes/header.php');
                         <form action="../controllers/resend-code.php" method="post">
                             <div class="form-group mb-3">
                                 <label for="">Email Address</label>
-                                <input type="text" name="email" class="form-control" placeholder="Enter Your Email Address">
+                                <input type="email" name="email" class="form-control" placeholder="Enter Your Email Address" required>
                             </div>
                             <div class="form-group mb-3">
                                 <button type="submit" name="resend_email_verify_btn" class="btn btn-primary">Submit</button>

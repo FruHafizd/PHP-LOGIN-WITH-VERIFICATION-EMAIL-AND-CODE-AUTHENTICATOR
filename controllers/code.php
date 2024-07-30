@@ -3,9 +3,14 @@ require_once "verifyUser.php";
 include 'dbcon.php';
 session_start();
 
-    
-    if (isset($_POST['register_btn'])) 
-    {
+class Code 
+{
+    public function Register()
+    {   
+        $db = new dbcon();
+        $con = $db->ConnectionDatabase();
+        if (isset($_POST['register_btn'])) 
+        {
             $email = $_POST['email'];
             $password = $_POST['password'];
             $passowrd_hashed = password_hash($password,PASSWORD_BCRYPT);
@@ -26,7 +31,8 @@ session_start();
                 $query_run = mysqli_query($con,$query);
 
                 if ($query_run) {
-                    sendVerifyEmail("$name","$email","$verify_token");
+                    $verifyUser = new verifyUser();
+                    $verifyUser->sendVerifyEmail("$name","$email","$verify_token");
                     $_SESSION['status'] = "Registration Succesfully, Please Verify Your Account";
                     header("Location: ../public/login.php");
                 }else {
@@ -35,6 +41,9 @@ session_start();
                 }
             }
         }
-    
+    }
 
+} 
 
+$code = new Code();
+$code->Register();

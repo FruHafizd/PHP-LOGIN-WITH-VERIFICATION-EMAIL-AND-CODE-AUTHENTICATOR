@@ -16,19 +16,19 @@ include('../includes/header.php');
                         <form action="../controllers/code.php" method="post">
                             <div class="form-group mb-3">
                                 <label for="">Name</label>
-                                <input type="text" name="name" class="form-control">
+                                <input type="text" name="name" class="form-control" required>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="">Phone Number</label>
-                                <input type="text" name="phone" class="form-control">
+                                <input type="number" name="phone" class="form-control" required>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="">Email Addres </label>
-                                <input type="text" name="email" class="form-control">
+                                <input type="email" name="email" class="form-control" required>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="">Password</label>
-                                <input type="text" name="password" class="form-control">
+                                <input type="password" name="password" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <button type="submit" name="register_btn" class="btn btn-primary">Register Now</button>

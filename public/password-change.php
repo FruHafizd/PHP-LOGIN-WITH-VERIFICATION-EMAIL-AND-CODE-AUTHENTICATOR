@@ -29,19 +29,19 @@ include('../includes/header.php');
                             <input type="hidden" name="password_token" value="<?php if (isset($_GET['token'])) {echo $_GET['token'];}?>">
                             <div class="form-group mb-3">
                                 <label for="">Email Address</label>
-                                <input type="text" value="<?php 
+                                <input type="email" value="<?php 
                                 if (isset($_GET['email'])) {
                                     echo $_GET['email'];
                                 }?>" 
-                                name="email" class="form-control" placeholder="Enter Your Email Address">
+                                name="email" class="form-control" placeholder="Enter Your Email Address" required>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="">New Password</label>
-                                <input type="text" name="new_password" class="form-control" placeholder="Enter Your New Password">
+                                <input type="password" name="new_password" class="form-control" placeholder="Enter Your New Password" required>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="">Confim Password</label>
-                                <input type="text" name="confirm_password" class="form-control" placeholder="Confirm Your Password">
+                                <input type="password" name="confirm_password" class="form-control" placeholder="Confirm Your Password" required>
                             </div>
                             <div class="form-group mb-3">
                                 <button type="submit" name="password_update" class="btn btn-primary">Update Password</button>

@@ -4,44 +4,58 @@ include 'dbcon.php';
 require_once "verifyUser.php";
 
 
-if (isset($_POST['resend_email_verify_btn'])) 
+class ResendCode extends verifyUser
 {
-    if (!empty(trim($_POST['email']))) {
-        $email = mysqli_real_escape_string($con,$_POST['email']);
-
-        $checkemail_query = "SELECT * FROM users WHERE email='$email' LIMIT 1 ";
-        $checkemail_query_run = mysqli_query($con,$checkemail_query);
+    public function resendEmail()
+    {   
+        $db = new dbcon();
+        $con = $db->ConnectionDatabase();
         
-        if (mysqli_num_rows($checkemail_query_run) > 0) 
+        if (isset($_POST['resend_email_verify_btn'])) 
         {
-            $row = mysqli_fetch_assoc($checkemail_query_run);
-            if ($row['verify_status'] == "0") {
+            if (!empty(trim($_POST['email']))) {
+                
+                $email = mysqli_real_escape_string($con,$_POST['email']);
 
-                $name = $row['name'];
-                $email = $row['email'];
-                $verify_token = $row['verify_token'];
+                $checkemail_query = "SELECT * FROM users WHERE email='$email' LIMIT 1 ";
+                $checkemail_query_run = mysqli_query($con,$checkemail_query);
+                
+                if (mysqli_num_rows($checkemail_query_run) > 0) 
+                {
+                    $row = mysqli_fetch_assoc($checkemail_query_run);
+                    if ($row['verify_status'] == "0") {
 
-                resend_email_verify($name,$email,$verify_token);
-                $_SESSION['status'] = "Verification email has been sent to you email addres";
-                header("Location: ../public/login.php");
-                exit(0);
+                        $name = $row['name'];
+                        $email = $row['email'];
+                        $verify_token = $row['verify_token'];
+                        $verifyUser = new verifyUser();
+                        $verifyUser->resend_email_verify($name,$email,$verify_token);
+                        $_SESSION['status'] = "Verification email has been sent to you email addres";
+                        header("Location: ../public/login.php");
+                        exit(0);
+                    }else {
+                        $_SESSION['status'] = "Email Already Verified. Please Log In";
+                        header("Location: ../public/resend-email-verification.php");
+                        exit(0);
+                    }
+                } else {
+                    $_SESSION['status'] = "Email Is not Registred. Please Registred Now";
+                    header("Location: ../public/register.php");
+                    exit(0);
+                }
+                
+
             }else {
-                $_SESSION['status'] = "Email Already Verified. Please Log In";
+                $_SESSION['status'] = "Please Enter the Email field";
                 header("Location: ../public/resend-email-verification.php");
                 exit(0);
             }
         } else {
-            $_SESSION['status'] = "Email Is not Registred. Please Registred Now";
-            header("Location: ../public/register.php");
-            exit(0);
+            # code...
         }
-        
-
-    }else {
-        $_SESSION['status'] = "Please Enter the Email field";
-        header("Location: ../public/resend-email-verification.php");
-        exit(0);
     }
-} else {
-    # code...
 }
+
+// Create an instance and call the method
+$resendCode = new ResendCode();
+$resendCode->resendEmail();

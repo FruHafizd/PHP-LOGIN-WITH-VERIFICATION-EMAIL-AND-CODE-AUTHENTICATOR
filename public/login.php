@@ -36,11 +36,11 @@ include('../includes/header.php');
                         <form action="../controllers/logincode.php" method="post">
                             <div class="form-group mb-3">
                                 <label for="">Email Addres </label>
-                                <input type="text" name="email" class="form-control">
+                                <input type="email" name="email" class="form-control" required>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="">Password</label>
-                                <input type="text" name="password" class="form-control">
+                                <input type="password" name="password" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary" name="login_now_btn">Login Now</button>
@@ -56,4 +56,4 @@ include('../includes/header.php');
     </div>
 </div>
 
-<?php include('../includes/footer.php.php')?>
+<?php include('../includes/footer.php')?>
